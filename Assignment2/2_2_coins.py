@@ -26,7 +26,6 @@ if circles is not None:
     for (x, y, diameter) in circles :
         cv2.circle(img,(x,y), diameter,(0,0,255), thickness,cv2.LINE_AA)
         cv2.circle(img,(x,y), 2,(0,255,0), thickness)
-        
 else:
     print("Cannot detect circle.")
 
