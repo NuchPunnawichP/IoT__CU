@@ -25,7 +25,7 @@ right_lines = []
 for line in lines if lines is not None else []:
     x1, y1, x2, y2 = line[0]
     slope = (y2 - y1) / (x2 - x1) if (x2 - x1) != 0 else 0
-    if 0.5 < abs(slope):  # Filter out lines with slopes close to horizontal
+    if 0.5 < abs(slope):
         if slope < 0:
             left_lines.append((x1, y1, x2, y2))
         else:
