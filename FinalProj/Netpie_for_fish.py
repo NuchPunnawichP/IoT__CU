@@ -28,7 +28,7 @@ Secret = "qJyjtEjcNJHRdbyeBj1kRgL3wF2WoyFk"
 
 MqttUser_Pass = {"username":Token,"password":Secret}
 
-sensor_data = {"Temp": 0, "Light": 0, "Turbinity": 0}
+
 
 
 # The callback for when the client receives a CONNACK response from the server.
@@ -71,6 +71,7 @@ except serial.SerialException as e:
     exit()
 
 while True:
+    sensor_data = {"Temp": 0, "Light": 0, "Turbinity": 0}
     data = ser.readline().decode('utf-8').strip()
     data = data.split()
 
@@ -78,9 +79,9 @@ while True:
         sensor_data["Temp"] = float(''.join(filter(str.isdigit, data[0]))) / 10000
         sensor_data["Light"] = int(''.join(filter(str.isdigit, data[1])))
         sensor_data["Turbinity"] = float(''.join(filter(str.isdigit, data[2]))) / 100
-    sensor_data["Temp"] = random.randint(30, 40)
-    sensor_data["Light"] = random.randint(30, 40)
-    sensor_data["Turbinity"] = random.randint(30, 40)
+    #sensor_data["Temp"] = random.randint(30, 40)
+    #sensor_data["Light"] = random.randint(30, 40)
+    #sensor_data["Turbinity"] = random.randint(30, 40)
     
     temperature = sensor_data["Temp"]
     light_intensity = sensor_data["Light"]
@@ -90,7 +91,7 @@ while True:
     client.publish(Publish_Topic, data_out, retain= True)
     print ("Publish.....")
     
-    if light_intensity >= 60 or temperature >= 25 or turbinity >= 20:
+    if light_intensity >= 80 or temperature >= 30 or turbinity >= 200:
         print('Data is sent')
         st = ( f'\nCurrent temperature: {temperature}\n' f'Current light level: {light_intensity}\n' f'Current turbidity: {turbinity}\n' )
         msg = {
